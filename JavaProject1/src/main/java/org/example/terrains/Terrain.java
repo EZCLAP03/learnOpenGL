@@ -4,6 +4,8 @@ package org.example.terrains;
 import org.example.ObjectLoader;
 import org.example.entity.Model;
 import org.example.textures.ModelTexture;
+import org.example.textures.TerrainTexture;
+import org.example.textures.TerrainTexturePack;
 
 import java.util.Arrays;
 
@@ -15,10 +17,12 @@ public class Terrain {
     private float x;
     private float z;
     private Model model;
-    private ModelTexture texture;
+    private TerrainTexturePack texturePack;
+    private TerrainTexture blendMap;
 
-    public Terrain(int gridX, int gridZ, ObjectLoader loader, ModelTexture texture){
-        this.texture = texture;
+    public Terrain(int gridX, int gridZ, ObjectLoader loader, TerrainTexturePack texturePack, TerrainTexture blendMap) {
+        this.texturePack = texturePack;
+        this.blendMap = blendMap;
         this.x = gridX * SIZE;
         this.z = gridZ * SIZE;
         model = generateTerrain(loader);
@@ -36,9 +40,12 @@ public class Terrain {
         return model;
     }
 
+    public TerrainTexturePack getTexturePack() {
+        return texturePack;
+    }
 
-    public ModelTexture getTexture() {
-        return texture;
+    public TerrainTexture getBlendMap() {
+        return blendMap;
     }
 
     private Model generateTerrain(ObjectLoader loader){

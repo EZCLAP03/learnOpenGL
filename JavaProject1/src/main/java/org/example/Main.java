@@ -3,7 +3,7 @@ import org.example.entity.*;
 import org.example.shaders.StaticShader;
 import org.example.shaders.TerrainShader;
 import org.example.terrains.Terrain;
-import org.example.textures.ModelTexture;
+import org.example.textures.*;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
@@ -22,6 +22,13 @@ public class Main {
         window.init();
         ObjectLoader loader = new ObjectLoader();
 
+        TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grass"));
+        TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
+        TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("path"));
+        TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("grassFlowers"));
+
+        TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
+        TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
 
 
         Model model = OBJLoader.loadObjModel("dragon", loader);
@@ -48,10 +55,6 @@ public class Main {
             allEntities.add(new Entity(texturedModel, new Vector3f(x, y, z), random.nextFloat() * 180f,
                     random.nextFloat() * 180f, 0f, 1f));
         }
-        Terrain terrain = new Terrain(0, -1, loader, new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain2 = new Terrain(-1, -1, loader, new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain3 = new Terrain(0, 1, loader, new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain4 = new Terrain(1, 1, loader, new ModelTexture(loader.loadTexture("grass")));
 
         Camera camera = new Camera(window);
         Entity entity = new Entity(texturedModel, new Vector3f(0, 5, -40),0, 0, 0, 1);
@@ -67,13 +70,15 @@ public class Main {
                 0, 0, 0, 1);
         }
 
+        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
+        Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap);
+
+
         MasterRenderer renderer = new MasterRenderer(window);
         while(!window.windowShouldClose()){
             //game logic
             renderer.processTerrain(terrain);
             renderer.processTerrain(terrain2);
-            renderer.processTerrain(terrain3);
-            renderer.processTerrain(terrain4 );
             renderer.processEntity(entity1);
             renderer.processEntity(entity);
             renderer.processEntity(entity);
