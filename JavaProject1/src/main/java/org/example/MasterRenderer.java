@@ -21,14 +21,14 @@ public class MasterRenderer {
     private static final float FOV = 100;
     private static final float NEAR_PLANE = 0.1f;
     private static final float FAR_PLANE = 1100.0f;
-    private static final float RED = 0.5f;
-    private static final float GREEN = 0.5f;
-    private static final float BLUE = 0.5f;
+    private static final float RED = 0f;
+    private static final float GREEN = 0f;
+    private static final float BLUE = 0f;
+    private static final float aspectRatio = (float) 1.8;
 
 
 
 
-    private WindowManager window1;
     private StaticShader shader = new StaticShader();
     private TerrainRenderer terrainRenderer;
     private TerrainShader terrainShader = new TerrainShader();
@@ -37,9 +37,8 @@ public class MasterRenderer {
     private List<Terrain> terrains = new ArrayList<Terrain>();
     private RenderManager renderer;
 
-    public MasterRenderer(WindowManager window) {
+    public MasterRenderer() {
         enableCulling();
-        this.window1 = window;
         Matrix4f projectionMatrix = createProjectionMatrix();
         System.out.println(projectionMatrix);
         renderer = new RenderManager(shader, projectionMatrix);
@@ -94,7 +93,6 @@ public class MasterRenderer {
     }
 
     private Matrix4f createProjectionMatrix() {
-        float aspectRatio = (float) window1.getWidth() / (float) window1.getHeight();
         float y_scale = (float) ((1f / Math.tan(Math.toRadians(FOV / 2f))) * aspectRatio);
         float x_scale = y_scale / aspectRatio;
         float frustum_length = FAR_PLANE - NEAR_PLANE;

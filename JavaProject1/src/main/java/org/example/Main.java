@@ -18,7 +18,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Main {
 
     public static void main(String[] args) {
-        WindowManager window = new WindowManager("Engine12", 1280, 720);
+        WindowManager window = new WindowManager("Engine12", 1280, 760);
         window.init();
         ObjectLoader loader = new ObjectLoader();
 
@@ -31,8 +31,8 @@ public class Main {
         TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
 
 
-        Model model = OBJLoader.loadObjModel("dragon", loader);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("images"));
+        Model model = OBJLoader.loadObjModel("test", loader);
+        ModelTexture texture = new ModelTexture(loader.loadTexture("default"));
         TexturedModel texturedModel = new TexturedModel(model, texture);
         texturedModel.getTexture().setHasTransparency(true);
         Model model1 = OBJLoader.loadObjModel("fern", loader);
@@ -57,35 +57,34 @@ public class Main {
         }
 
         Camera camera = new Camera(window);
-        Entity entity = new Entity(texturedModel, new Vector3f(0, 5, -40),0, 0, 0, 1);
-        Entity entity1 = new Entity(texturedModel1, new Vector3f(0, 0, -30),0, 0, 0, 1f);
+        Entity entity = new Entity(texturedModel, new Vector3f(0, 5, -40),0, 0, 0, 3);
+        Entity entity1 = new Entity(texturedModel1, new Vector3f(0, 0, -30),0, 0, 0, 0.6f);
         texturedModel1.getTexture().setHasTransparency(true);
 
         Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1,1,1));
 
         Entity[] l = new Entity[50];
         for(int j = 0; j < 50; j++) {
-            Entity entity2;
-            l[j] = entity2 = new Entity(texturedModel1, new Vector3f(random.nextInt(400)*-1, 0, random.nextInt(400)*-1),
-                0, 0, 0, 1);
+            Entity entity2 = new Entity(texturedModel1, new Vector3f(random.nextInt(400)*-1, 0, random.nextInt(400)*-1),
+                    0, 0, 0, 1f);
+            l[j] = entity2;
+
         }
 
         Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
         Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap);
 
 
-        MasterRenderer renderer = new MasterRenderer(window);
+        MasterRenderer renderer = new MasterRenderer();
         while(!window.windowShouldClose()){
             //game logic
-            renderer.processTerrain(terrain);
-            renderer.processTerrain(terrain2);
-            renderer.processEntity(entity1);
-            renderer.processEntity(entity);
+//            renderer.processTerrain(terrain);
+//            renderer.processTerrain(terrain2);
             renderer.processEntity(entity);
 
-            for(int i = 0; i < l.length; i++){
-                renderer.processEntity(l[i]);
-            }
+//            for(int i = 0; i < l.length; i++){
+//                renderer.processEntity(l[i]);
+//            }
 
             camera.move();
 
