@@ -37,9 +37,8 @@ public class ObjectLoader {
     public int loadTexture(String fileName){
         Texture texture = new Texture("C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/" +
                 "org/example/res/" + fileName + ".png");
-        GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
-        GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL14.GL_TEXTURE_LOD_BIAS, -0.4f);
+        //GL30.glGenerateMipmap(GL_TEXTURE_2D);
+        //GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
         int textureID = texture.getTextureID();
         textures.add(textureID);
         return textureID;

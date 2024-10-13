@@ -15,7 +15,10 @@ public class WindowManager {
     private final String title;
 
     private int width, height;
-    private long window;
+    private static long window;
+
+    private static long lastFrameTime;
+    private static float delta;
 
     private boolean resize, vSync;
 
@@ -25,7 +28,7 @@ public class WindowManager {
         this.height = height;
     }
 
-    public long getWindowID(){
+    public static long getWindowID(){
         return window;
     }
 
@@ -42,6 +45,7 @@ public class WindowManager {
         GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2);
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_PROFILE, GLFW.GLFW_OPENGL_CORE_PROFILE);
         GLFW.glfwWindowHint(GLFW.GLFW_OPENGL_FORWARD_COMPAT, GL11.GL_TRUE);
+
 
         boolean maximised = false;
         if (width == 0 || height == 0) {
@@ -68,6 +72,8 @@ public class WindowManager {
 
         GLFW.glfwShowWindow(window);
         GL.createCapabilities();
+
+        lastFrameTime = getCurrentTime();
     }
 
     public void update(){
@@ -79,6 +85,15 @@ public class WindowManager {
         if(glfwGetKey(window, GLFW_KEY_N) == 1){
             GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
         }
+
+        long currentFrameTime = getCurrentTime();
+        delta = (currentFrameTime - lastFrameTime)/1000f;
+        lastFrameTime = currentFrameTime;
+
+    }
+
+    public static float getFrameTimeSeconds(){
+        return delta;
     }
 
     public void cleanup(){
@@ -120,6 +135,9 @@ public class WindowManager {
         return window;
     }
 
+    private static long getCurrentTime(){
+        return System.currentTimeMillis();
+    }
 
 
 }

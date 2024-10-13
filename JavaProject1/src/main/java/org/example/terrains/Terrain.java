@@ -8,6 +8,7 @@ import org.example.textures.TerrainTexture;
 import org.example.textures.TerrainTexturePack;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Terrain {
 
@@ -49,6 +50,7 @@ public class Terrain {
     }
 
     private Model generateTerrain(ObjectLoader loader){
+        Random random = new Random();
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];

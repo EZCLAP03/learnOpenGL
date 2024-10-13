@@ -49,13 +49,13 @@ public class MasterRenderer {
     public void render(Light sun, Camera camera){
         init();
         shader.start();
-        shader.loadSkyColour(RED, GREEN, BLUE);
+        shader.loadSkyColour(0.5f, 0.5f, 0.5f);
         shader.loadLight(sun);
         shader.loadviewMatrix(camera);
         renderer.render(entities);
         shader.stop();
         terrainShader.start();
-        terrainShader.loadSkyColour(RED, GREEN, BLUE);
+        terrainShader.loadSkyColour(0.5f, 0.5f, 0.5f);
         terrainShader.loadLight(sun);
         terrainShader.loadviewMatrix(camera);
         terrainRenderer.render(terrains);
@@ -89,7 +89,6 @@ public class MasterRenderer {
     public void init(){
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
-        GL11.glClearColor(RED, GREEN, BLUE, 1);
     }
 
     private Matrix4f createProjectionMatrix() {
