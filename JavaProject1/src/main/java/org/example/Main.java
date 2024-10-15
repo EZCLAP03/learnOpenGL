@@ -18,7 +18,7 @@ import static org.lwjgl.glfw.GLFW.*;
 public class Main {
 
     public static void main(String[] args) {
-        WindowManager window = new WindowManager("i said babes mans not hot", 1280, 760);
+        WindowManager window = new WindowManager("w h y", 1280, 760);
         window.init();
         window.setClearColor(0.5f, 0.5f, 0.5f, 1);
         ObjectLoader loader = new ObjectLoader();
@@ -42,10 +42,19 @@ public class Main {
         texturedModel1.getTexture().setHasTransparency(false);
         texturedModel1.getTexture().setUseFakeLighting(true);
 
+        Model model2 = OBJLoader.loadObjModel("dragon", loader);
+        ModelTexture texture2 = new ModelTexture(loader.loadTexture("images"));
+        TexturedModel texturedModel2 = new TexturedModel(model2, texture2);
 
-        ModelTexture t = texturedModel.getTexture();
+
+        ModelTexture t = texturedModel2.getTexture();
         t.setShineDamper(10);
         t.setReflectivity(1);
+
+        ModelTexture t1 = texturedModel1.getTexture();
+        t1.setShineDamper(10);
+        t1.setReflectivity(0);
+
 
         List<Entity> allEntities = new ArrayList<Entity>();
         Random random = new Random();
@@ -60,19 +69,23 @@ public class Main {
 
         Entity entity = new Entity(texturedModel, new Vector3f(0, 5, -40),0, 0, 0, 3);
         Entity entity1 = new Entity(texturedModel1, new Vector3f(0, 0, -30),0, 0, 0, 0.6f);
+        Entity entity3 = new Entity(texturedModel2, new Vector3f(0, 0, -30),0, 0, 0, 1.5f);
 
         Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1,1,1));
 
         Entity[] l = new Entity[50];
+
+
+        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap, "heightMap");
+        Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap, "heightMap");
         for(int j = 0; j < 50; j++) {
-            Entity entity2 = new Entity(texturedModel1, new Vector3f(random.nextInt(400)*-1, 0, random.nextInt(400)*-1),
+            float x = random.nextInt(400)*-1;
+            float z =random.nextInt(400)*-1;
+            Entity entity2 = new Entity(texturedModel1, new Vector3f(x, terrain2.getHeightOfTerrain(x, z), z),
                     0, 0, 0, 1f);
             l[j] = entity2;
 
         }
-
-        Terrain terrain = new Terrain(0, -1, loader, texturePack, blendMap);
-        Terrain terrain2 = new Terrain(-1, -1, loader, texturePack, blendMap);
 
 
         TexturedModel dragon = new TexturedModel(model, texture);
@@ -84,8 +97,9 @@ public class Main {
             //game logic
            renderer.processTerrain(terrain);
            renderer.processTerrain(terrain2);
-           player.move();
+           player.move(terrain2);
            renderer.processEntity(player);
+           renderer.processEntity(entity3);
 
 
             for (Entity value : l) {

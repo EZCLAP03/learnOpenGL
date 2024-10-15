@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import org.example.terrains.Terrain;
 import org.example.utils.MouseHandler;
 import org.joml.Vector3f;
 
@@ -93,6 +94,10 @@ public class Camera {
     private void calculateYaw(DoubleBuffer x) {
             double hi = x.get();
             yaw = (float)(hi * 0.1);
+    }
+
+    private void terrainCollider(Terrain terrain){
+
     }
 
 }

@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import org.example.WindowManager;
+import org.example.terrains.Terrain;
 import org.example.utils.Maths;
 import org.joml.Vector3f;
 
@@ -26,7 +27,7 @@ public class Player extends Entity{
         glfwSetInputMode(WindowManager.getWindowID(), GLFW_STICKY_KEYS, GLFW_TRUE);
     }
 
-    public void move(){
+    public void move(Terrain terrain){
 
         checkInputs();
         float distance = currentSpeed * WindowManager.getFrameTimeSeconds();
@@ -39,10 +40,11 @@ public class Player extends Entity{
 
         upwardsSpeed += GRAVITY * WindowManager.getFrameTimeSeconds();
         super.increasePosition(0, upwardsSpeed * WindowManager.getFrameTimeSeconds(), 0);
-        if(getPosition().y<TERRAIN_HEIGHT){
+        float terrainHeight = terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z);
+        if(super.getPosition().y<terrainHeight){
             upwardsSpeed = 0;
             isInAir = false;
-            getPosition().y = TERRAIN_HEIGHT;
+            getPosition().y = terrainHeight;
         }
 
     }
@@ -85,4 +87,5 @@ public class Player extends Entity{
 
 
     }
+
 }
