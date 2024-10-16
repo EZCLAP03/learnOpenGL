@@ -7,8 +7,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class StaticShader extends ShaderProgram {
-    private static final String VERTEX_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/shaders/vertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/shaders/fragmentShader.txt";
+    private static final String VERTEX_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/shaders/vertexShader.txt";
+    private static final String FRAGMENT_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/shaders/fragmentShader.txt";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;

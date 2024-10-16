@@ -43,17 +43,17 @@ public class Main {
         texturedModel1.getTexture().setUseFakeLighting(true);
 
         Model model2 = OBJLoader.loadObjModel("dragon", loader);
-        ModelTexture texture2 = new ModelTexture(loader.loadTexture("images"));
+        ModelTexture texture2 = new ModelTexture(loader.loadTexture("default"));
         TexturedModel texturedModel2 = new TexturedModel(model2, texture2);
 
 
         ModelTexture t = texturedModel2.getTexture();
         t.setShineDamper(10);
-        t.setReflectivity(1);
+        t.setReflectivity(0);
 
         ModelTexture t1 = texturedModel1.getTexture();
         t1.setShineDamper(10);
-        t1.setReflectivity(0);
+        t1.setReflectivity(1);
 
 
         List<Entity> allEntities = new ArrayList<Entity>();
@@ -69,7 +69,7 @@ public class Main {
 
         Entity entity = new Entity(texturedModel, new Vector3f(0, 5, -40),0, 0, 0, 3);
         Entity entity1 = new Entity(texturedModel1, new Vector3f(0, 0, -30),0, 0, 0, 0.6f);
-        Entity entity3 = new Entity(texturedModel2, new Vector3f(0, 0, -30),0, 0, 0, 1.5f);
+        Entity entity3 = new Entity(texturedModel2, new Vector3f(0, 2, -100),0, 0, 0, 10f);
 
         Light light = new Light(new Vector3f(3000, 2000, 2000), new Vector3f(1,1,1));
 
@@ -89,7 +89,7 @@ public class Main {
 
 
         TexturedModel dragon = new TexturedModel(model, texture);
-        Player player = new Player(dragon, new Vector3f(0, 0, -50), 0, 0, 0, 1);
+        Player player = new Player(dragon, new Vector3f(0, 0, -50), 0, 0, 0, 0.0001f);
         Camera camera = new Camera(window, player);
 
         MasterRenderer renderer = new MasterRenderer();

@@ -12,7 +12,7 @@ public class OBJLoader {
     public static Model loadObjModel(String filename, ObjectLoader loader){
         FileReader fr = null;
         try {
-            fr = new FileReader(new File("C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/res/" + filename + ".obj"));
+            fr = new FileReader(new File("C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/res/" + filename + ".obj"));
         } catch (FileNotFoundException e) {
             System.err.println("FileNotFoundException: " + e.getMessage());
             throw new RuntimeException(e);

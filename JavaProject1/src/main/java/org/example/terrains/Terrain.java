@@ -68,7 +68,7 @@ public class Terrain {
 
         BufferedImage image = null;
         try {
-            image = ImageIO.read(new File("C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/res/" + heightMap + ".png"));
+            image = ImageIO.read(new File("C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/res/" + heightMap + ".png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

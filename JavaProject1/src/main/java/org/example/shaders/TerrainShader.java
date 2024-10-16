@@ -8,8 +8,8 @@ import org.joml.Vector3f;
 
 public class TerrainShader extends ShaderProgram {
 
-    private static final String VERTEX_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/shaders/terrainVertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/learnOpenGL/JavaProject1/src/main/java/org/example/shaders/terrainFragmentShader.txt";
+    private static final String VERTEX_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/shaders/terrainVertexShader.txt";
+    private static final String FRAGMENT_FILE = "C:/Users/haris/Desktop/OpenGL-Experiments/opengl game engine/JavaProject1/src/main/java/org/example/shaders/terrainFragmentShader.txt";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;
