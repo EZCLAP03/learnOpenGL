@@ -37,7 +37,8 @@ public class Main {
         TexturedModel texturedModel = new TexturedModel(model, texture);
         texturedModel.getTexture().setHasTransparency(true);
         Model model1 = OBJLoader.loadObjModel("fern", loader);
-        ModelTexture texture1 = new ModelTexture(loader.loadTexture("fern"));
+        ModelTexture texture1 = new ModelTexture(loader.loadTexture("fern2"));
+        texture1.setNumberOfRows(2);
         TexturedModel texturedModel1 = new TexturedModel(model1, texture1);
         texturedModel1.getTexture().setHasTransparency(false);
         texturedModel1.getTexture().setUseFakeLighting(true);
@@ -49,11 +50,11 @@ public class Main {
 
         ModelTexture t = texturedModel2.getTexture();
         t.setShineDamper(10);
-        t.setReflectivity(0);
+        t.setReflectivity(1);
 
         ModelTexture t1 = texturedModel1.getTexture();
         t1.setShineDamper(10);
-        t1.setReflectivity(1);
+        t1.setReflectivity(0.1f);
 
 
         List<Entity> allEntities = new ArrayList<Entity>();
@@ -81,7 +82,7 @@ public class Main {
         for(int j = 0; j < 50; j++) {
             float x = random.nextInt(400)*-1;
             float z =random.nextInt(400)*-1;
-            Entity entity2 = new Entity(texturedModel1, new Vector3f(x, terrain2.getHeightOfTerrain(x, z), z),
+            Entity entity2 = new Entity(texturedModel1, random.nextInt(4), new Vector3f(x, terrain2.getHeightOfTerrain(x, z), z),
                     0, 0, 0, 1f);
             l[j] = entity2;
 

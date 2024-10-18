@@ -1,6 +1,7 @@
 package org.example.shaders;
 
 import org.joml.Matrix4f;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
@@ -94,6 +95,11 @@ public abstract class ShaderProgram {
         matrix.set(matrixBuffer);
         matrixBuffer.flip();
         GL20.glUniformMatrix4fv(location, false, matrixBuffer);
+    }
+
+    protected void load2DVector(int location, Vector2f vector){
+        GL20.glUniform2f(location, vector.x, vector.y);
+
     }
 
     private static int loadShader(String file, int type){
